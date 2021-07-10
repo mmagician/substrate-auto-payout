@@ -23,19 +23,19 @@ Go to [Polkadot JS UI](https://polkadot.js.org/apps/#/accounts) and export the a
 Using parameters:
 
 ```
-node autopayout.js -a keystores/account.json -p password -v validator_stash_address
+node autopayout-validators.js -a keystores/account.json -p password -v validator_stash_address -v second_validator_stash_address
 ```
 
 Ask for password:
 
 ```
-node autopayout.js -a keystores/account.json -v validator_stash_address
+node autopayout-validators.js -a keystores/account.json -v validator_stash_address
 ```
 
 Or simply edit `config.js` with your data and run without any parameter (cron friendly):
 
 ```
-node autopayout.js
+node autopayout-validators.js
 ```
 Example output:
 
@@ -61,11 +61,3 @@ Success! Check tx in PolkaScan: https://polkascan.io/kusama/transaction/0xdb63b7
 NOTE: Set `config.js` file permissions to `600` for better security.
 
 TODO: It doesn't take in account ongoing elections yet!
-
-## Using multiple validators
-
-Edit `validators` array in `config.js` to add the stash address of your validators, then:
-
-```
-node autopayout-validators.js
-```

@@ -33,6 +33,11 @@ const argv = yargs
       description: 'Account password, or stdin if this is not set',
       type: 'string',
   })
+  .option('validator', {
+      alias: 'v',
+      description: 'Validator address',
+      type: 'array',
+   })
   .option('log', {
     alias: 'l',
     description: 'log (append) to autopayout.log file',
@@ -56,6 +61,9 @@ const log = argv.log || config.log;
 
 // Node websocket
 const wsProvider = config.nodeWS;
+
+// List of validators
+const validators = argv.validator || config.validators;
 
 const main = async () => {
 
@@ -110,8 +118,8 @@ const main = async () => {
 
     let transactions = [];
 
-    for (let index = 0; index < config.validators.length; index++) {
-      const validator = config.validators[index];
+    for (let index = 0; index < validators.length; index++) {
+      const validator = validators[index];
       let unclaimedRewards = [];
       let era = activeEra - 84;
       const stakingInfo = await api.derive.staking.account(validator);
